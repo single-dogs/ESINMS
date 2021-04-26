@@ -5,4 +5,4 @@ npx lint-staged
 
 npm run build
 
-npm add dist
+git add dist
