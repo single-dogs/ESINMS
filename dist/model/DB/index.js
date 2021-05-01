@@ -7,7 +7,7 @@ exports.collections = exports.db = exports.client = void 0;
 
 var _mongodb = require("mongodb");
 
-var _config = _interopRequireDefault(require("../config"));
+var _config = _interopRequireDefault(require("../../config"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

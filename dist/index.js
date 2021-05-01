@@ -36,4 +36,7 @@ server // dev logger
   key: 'sk'
 }, server)) // router
 .use(_router.router.routes()).use(new _koaRouter.default().allowedMethods()) // listen
-.listen(80);
+.listen(80); // 异步主控制流
+// import 
+// (async () => {
+// })()
