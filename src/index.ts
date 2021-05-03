@@ -37,3 +37,10 @@ server
 
   // listen
   .listen(80)
+
+// 异步主控制流
+
+// import 
+// (async () => {
+
+// })()
