@@ -5,13 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Vehicle = void 0;
 
-class Vehicle {
+var _Device = require("./Device");
+
+class Vehicle extends _Device.Device {
   constructor(opts) {
+    super(opts.timeRange);
     this.id = opts.id;
     this.numbers = opts.numbers;
     this.type = opts.type;
     this.driver = opts.driver;
-    this.timeRange = opts.timeRange;
     this.device = opts.device;
   }
 

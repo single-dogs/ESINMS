@@ -21,30 +21,25 @@ exports.DeviceState = DeviceState;
 
 class TimeRule extends Rule {
   constructor({
-    device,
-    timeRange
+    device
   }) {
     super();
     this.device = device;
-    this.timeRage = timeRange;
     this.deviceState = DeviceState.BEFORE_WORK;
   }
 
   resolveData(data) {
-    if (Date.now() <= this.timeRage.start) {
+    if (Date.now() <= this.device.realTimeRange.start) {
       // 上班前的时间
       if (this.deviceState == DeviceState.BEFORE_WORK) {
         // 打卡
         this.deviceState = DeviceState.AT_WORK;
       }
-    } else if (Date.now() <= this.timeRage.end) {
+    } else if (Date.now() <= this.device.realTimeRange.end) {
       // 上班中的时间
       if (data.online) {
         // 开启设备
-        if (this.deviceState == DeviceState.LEAVE_WORK) {
-          // 早退状态恢复
-          this.deviceState = DeviceState.AT_WORK;
-        }
+        this.deviceState = DeviceState.AT_WORK;
       } else {
         // 未开启设备
         if (this.deviceState == DeviceState.BEFORE_WORK) {

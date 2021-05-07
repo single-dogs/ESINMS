@@ -5,13 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Worker = void 0;
 
-class Worker {
+var _Device = require("./Device");
+
+class Worker extends _Device.Device {
   constructor(opts) {
+    super(opts.timeRange);
     this.id = opts.id;
     this.name = opts.name;
     this.type = opts.type;
     this.violation = [];
-    this.timeRange = opts.timeRange;
     this.device = opts.device;
   }
 
