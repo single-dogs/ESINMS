@@ -8,20 +8,19 @@ export interface WorkerOptions {
   device: number;
 }
 
-export class Worker implements Device {
+export class Worker extends Device {
   public id: number;
   public name: string;
   public type: string;
   public violation: Violation[];
-  public timeRange: TimeRange;
   public device: number;
 
   public constructor(opts: WorkerOptions) {
+    super(opts.timeRange)
     this.id = opts.id
     this.name = opts.name
     this.type = opts.type
     this.violation = []
-    this.timeRange = opts.timeRange
     this.device = opts.device
   }
   pushViolation(violation: Violation): void {
