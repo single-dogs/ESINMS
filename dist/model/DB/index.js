@@ -51,9 +51,17 @@ collections.Worker.createIndex({
   id: 1
 }, {
   unique: true
-}, console.log);
+}, err => {
+  if (err) {
+    console.log(err);
+  }
+});
 collections.Vehicle.createIndex({
   id: 1
 }, {
   unique: true
-}, console.log);
+}, err => {
+  if (err) {
+    console.log(err);
+  }
+});

@@ -17,7 +17,8 @@ class Device {
     this.realTimeRange = {
       start: baseTimeStamp() + 1000 * 60 * 60 * this.timeRange.start,
       end: baseTimeStamp() + 1000 * 60 * 60 * this.timeRange.end
-    };
+    }; // 凌晨更新时间
+
     schedule.scheduleJob('1 0 0 * * *', () => {
       this.realTimeRange.start = baseTimeStamp() + 1000 * 60 * 60 * this.timeRange.start;
       this.realTimeRange.end = baseTimeStamp() + 1000 * 60 * 60 * this.timeRange.end;

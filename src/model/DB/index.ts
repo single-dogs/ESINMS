@@ -29,8 +29,16 @@ const collections = {
  * - worker id 升序唯一索引
  * - vehicle id 升序唯一索引
  */
-collections.Worker.createIndex({ id: 1 }, { unique: true }, console.log)
-collections.Vehicle.createIndex({ id: 1 }, { unique: true }, console.log)
+collections.Worker.createIndex({ id: 1 }, { unique: true }, (err) => {
+  if (err) {
+    console.log(err)
+  }
+})
+collections.Vehicle.createIndex({ id: 1 }, { unique: true }, (err) => {
+  if (err) {
+    console.log(err)
+  }
+})
 
 export {
   client,
