@@ -22,6 +22,8 @@ const db = client.db(name)
 const collections = {
   Worker: db.collection('worker'),
   Vehicle: db.collection('vehicle'),
+  Violation: db.collection('Violation'),
+  IncId: db.collection('IncId'),
 }
 
 /**
@@ -40,8 +42,19 @@ collections.Vehicle.createIndex({ id: 1 }, { unique: true }, (err) => {
   }
 })
 
+// 自增键
+async function nextId(collection: string): Promise<number> {
+  const find = await collections.IncId.findOneAndUpdate({ collection }, { $inc: { id: 1 } }, {})
+  if (!find.value) {
+    await collections.IncId.insertOne({ collection, id: 0 })
+    return 0
+  }
+  return find.value.id + 1
+}
+
 export {
   client,
   db,
   collections,
+  nextId,
 }
