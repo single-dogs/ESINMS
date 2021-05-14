@@ -6,5 +6,3 @@ rm -r dist
 npx lint-staged
 
 npm run build
-
-git add dist
