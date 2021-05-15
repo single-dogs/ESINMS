@@ -6,6 +6,7 @@ import koaEtag from 'koa-etag'
 import koaSession from 'koa-session'
 import koaStatic from 'koa-static'
 import koaRouter from 'koa-router'
+import koaBodyParser from 'koa-bodyparser'
 
 // rest router
 import { router } from './router'
@@ -13,11 +14,18 @@ import { router } from './router'
 // util
 import path from 'path'
 
+// manager
+import { managerContext } from './model/Manager/Manager'
+
 // app
 const server: Koa = new Koa()
 
+
 // main
 server
+  // manager
+  .use(managerContext())
+
   // dev logger
   .use(koaLogger())
 
@@ -31,16 +39,12 @@ server
   // session
   .use(koaSession({ key: 'sk', }, server))
 
+  // bodyparser
+  .use(koaBodyParser())
+
   // router
   .use(router.routes())
   .use(new koaRouter().allowedMethods())
 
   // listen
-  .listen(80)
-
-// 异步主控制流
-
-// import 
-// (async () => {
-
-// })()
+  .listen(8080)
