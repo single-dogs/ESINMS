@@ -1,5 +1,6 @@
-import { MongoClient, MongoError } from 'mongodb'
+import { MongoClient, MongoError, ObjectId } from 'mongodb'
 import config from '../../config'
+import { TimeRange } from '../Device/Device'
 
 // 数据库配置
 const { db: { uri, name } } = config.get()
@@ -50,6 +51,37 @@ async function nextId(collection: string): Promise<number> {
     return 0
   }
   return find.value.id + 1
+}
+
+export interface DBWorker {
+  _id: ObjectId;
+  id: number;
+  name: string;
+  type: string;
+  timeRange: TimeRange;
+  openTimeRule: boolean;
+  device?: number;
+}
+
+export interface DBVehicle {
+  _id: ObjectId;
+  id: number;
+  numbers: number;
+  type: string;
+  driverId: number;
+  timeRange: TimeRange;
+  openTimeRule: boolean;
+  device?: number;
+}
+
+export interface DBViolation {
+  _id: ObjectId;
+  id: number;
+  workerId: number;
+  lon: string;
+  lat: string;
+  time: number;
+  message: string;
 }
 
 export {
