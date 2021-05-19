@@ -1,6 +1,6 @@
 import { Context } from 'koa'
 import { pick } from 'lodash'
-import { collections } from '../../../model/DB'
+import { collections, DBWorker } from '../../../model/DB'
 import { errorHandler } from '../../../util/errorHandler'
 import joi from 'joi'
 
@@ -43,7 +43,7 @@ export async function getWorkers(ctx: Context): Promise<void> {
     }
 
     const condition = pick(ctx.query, ['id', 'name', 'type', 'device'])
-    const result = await collections.Worker
+    const result: DBWorker[] = await collections.Worker
       .find(condition as Condition)
       .skip((params.page - 1) * params.limit)
       .limit(params.limit)
