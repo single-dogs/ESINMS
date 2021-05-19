@@ -1,9 +1,8 @@
 import { Context } from 'koa'
-import { collections } from '../../../model/DB'
+import { collections, DBViolation } from '../../../model/DB'
 import { errorHandler } from '../../../util/errorHandler'
 import joi from 'joi'
 import { assign, get, has, pick, set } from 'lodash'
-import { Violation } from '../../../model/Device/Device'
 
 // check
 const paramsSchema = joi.object({
@@ -46,7 +45,7 @@ export async function getViolations(ctx: Context): Promise<void> {
       })
     }
 
-    const result: Violation[] = await collections.Violation
+    const result: DBViolation[] = await collections.Violation
       .find(condition)
       .skip((params.page - 1) * params.limit)
       .limit(params.limit)
