@@ -80,7 +80,7 @@ export interface DBViolation {
   workerId: number;
   lon: string;
   lat: string;
-  time: number;
+  time: Date;
   message: string;
 }
 
