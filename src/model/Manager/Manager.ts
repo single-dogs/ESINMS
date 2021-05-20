@@ -59,6 +59,22 @@ export class Manager {
     this.addWorker(newObj)
   }
 
+  public addVehicle(vehicleOpts: any | VehicleOptions): void {
+    if (Vehicle.isActivable(vehicleOpts)) {
+      this.vehicleMap.set(vehicleOpts.id, Vehicle.deserialize(vehicleOpts))
+    }
+  }
+
+  public delVehicle(id: number): void {
+    this.vehicleMap.delete(id)
+  }
+
+  public reloadVehicle(id: number, newObj: any | VehicleOptions): void {
+    // todo 车辆驾驶员关联
+    this.delVehicle(id)
+    this.addVehicle(newObj)
+  }
+
   static getInstance(): Manager {
     if (!Manager.instance) {
       Manager.instance = new Manager()
