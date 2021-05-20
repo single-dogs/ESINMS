@@ -36,7 +36,7 @@ export async function addWorker(ctx: Context): Promise<void> {
       )
     )
 
-    ctx.manager.addWorker(result.ops[0] as WorkerOptions)
+    ctx.manager.addWorker(result.ops[0])
 
     ctx.body = {
       code: 0,

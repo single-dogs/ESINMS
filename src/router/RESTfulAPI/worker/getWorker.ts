@@ -1,5 +1,5 @@
 import { Context } from 'koa'
-import { pick } from 'lodash'
+import { pick, set } from 'lodash'
 import { collections, DBWorker } from '../../../model/DB'
 import { errorHandler } from '../../../util/errorHandler'
 import joi from 'joi'
@@ -53,7 +53,13 @@ export async function getWorkers(ctx: Context): Promise<void> {
       code: 0,
       data: {
         workers:
-          result.map(worker => pick(worker, ['id', 'name', 'type', 'timeRange', 'openTimeRule', 'device']))
+          result.map(worker =>
+            set(
+              pick(worker, ['id', 'name', 'type', 'timeRange', 'openTimeRule', 'device']),
+              'active',
+              ctx.manager.workerMap.has(worker.id)
+            )
+          )
       }
     }
   } catch (error) {
