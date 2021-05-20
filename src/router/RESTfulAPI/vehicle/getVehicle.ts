@@ -2,7 +2,7 @@ import { Context } from 'koa'
 import { collections, DBVehicle } from '../../../model/DB'
 import { errorHandler } from '../../../util/errorHandler'
 import joi from 'joi'
-import { pick } from 'lodash'
+import { pick, set } from 'lodash'
 
 // check
 const paramsSchema = joi.object({
@@ -37,9 +37,13 @@ export async function getVehicle(ctx: Context): Promise<void> {
     ctx.body = {
       code: 0,
       data: {
-        violations:
-          result.map(violation =>
-            pick(violation, ['id', 'numbers', 'type', 'driverId', 'timeRange', 'openTimeRule', 'device']),
+        vehicles:
+          result.map(vehicle =>
+            set(
+              pick(vehicle, ['id', 'numbers', 'type', 'driverId', 'timeRange', 'openTimeRule', 'device']),
+              'active',
+              ctx.manager.vehicleMap.has(vehicle.id)
+            )
           )
       }
     }
