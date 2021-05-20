@@ -24,8 +24,10 @@ export class Manager {
         return console.log(err)
       }
       workers.forEach((worker: WorkerOptions) => {
-        const workerObj = Worker.deserialize(worker)
-        this.workerMap.set(worker.id, workerObj)
+        if (Worker.isActivable(worker)) {
+          const workerObj = Worker.deserialize(worker)
+          this.workerMap.set(worker.id, workerObj)
+        }
       })
     })
     collections.Vehicle.find({}).toArray((err, vehicles) => {
@@ -33,15 +35,18 @@ export class Manager {
         return console.log(err)
       }
       vehicles.forEach((vehicle: VehicleOptions) => {
-        const vehicleObj = Vehicle.deserialize(vehicle)
-        this.vehicleMap.set(vehicle.id, vehicleObj)
-        return
+        if (Vehicle.isActivable(vehicle)) {
+          const vehicleObj = Vehicle.deserialize(vehicle)
+          this.vehicleMap.set(vehicle.id, vehicleObj)
+        }
       })
     })
   }
 
   public addWorker(workerOpts: any | WorkerOptions): void {
-    this.workerMap.set(workerOpts.id, Worker.deserialize(workerOpts))
+    if (Worker.isActivable(workerOpts)) {
+      this.workerMap.set(workerOpts.id, Worker.deserialize(workerOpts))
+    }
   }
 
   public delWorker(id: number): void {
