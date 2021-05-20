@@ -43,6 +43,10 @@ export class Vehicle extends Device {
     await this.timeRule?.close()
   }
 
+  public static isActivable(opts: VehicleOptions): boolean {
+    return opts.device !== undefined && opts.driverId !== undefined && opts.timeRange !== undefined
+  }
+
   public static deserialize(opts: VehicleOptions): Vehicle {
     return new Vehicle(opts)
   }

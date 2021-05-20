@@ -43,6 +43,10 @@ export class Worker extends Device {
     )
   }
 
+  public static isActivable(opts: WorkerOptions): boolean {
+    return opts.device !== undefined && opts.timeRange !== undefined
+  }
+
   public static deserialize(opts: WorkerOptions): Worker {
     return new Worker(opts)
   }
