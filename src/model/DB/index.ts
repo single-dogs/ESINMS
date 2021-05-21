@@ -21,8 +21,8 @@ const db = client.db(name)
 
 // 表
 const collections = {
-  Worker: db.collection('worker'),
-  Vehicle: db.collection('vehicle'),
+  Worker: db.collection('Worker'),
+  Vehicle: db.collection('Vehicle'),
   Violation: db.collection('Violation'),
   IncId: db.collection('IncId'),
 }
