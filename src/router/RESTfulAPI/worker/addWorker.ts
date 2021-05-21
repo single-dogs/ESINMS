@@ -13,7 +13,7 @@ const paramsSchema = joi.object({
     end: joi.number().required(),
   }).required(),
   openTimeRule: joi.bool().default(false),
-  device: joi.number().required(),
+  device: joi.number(),
 })
 
 export async function addWorker(ctx: Context): Promise<void> {
