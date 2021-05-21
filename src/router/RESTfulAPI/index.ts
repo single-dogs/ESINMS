@@ -1,6 +1,7 @@
 import { Context, DefaultState } from 'koa'
 import koaRouter from 'koa-router'
 import { getDeviceData } from './deviceData/getDeviceData'
+import { addVehicle } from './vehicle/addVehicle'
 import { getVehicle } from './vehicle/getVehicle'
 import { getViolations } from './violation/getViolation'
 import { addWorker } from './worker/addWorker'
@@ -16,6 +17,7 @@ rest.put('/worker', updateWorker)
 rest.get('/worker', getWorkers)
 
 rest.get('/vehicle', getVehicle)
+rest.post('/vehicle', addVehicle)
 
 rest.get('/violation', getViolations)
 rest.del('/violation', getViolations)
