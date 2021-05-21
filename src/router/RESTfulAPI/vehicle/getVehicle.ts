@@ -28,7 +28,7 @@ export async function getVehicle(ctx: Context): Promise<void> {
 
     const condition = pick(params, ['id', 'numbers', 'driverId', 'type', 'device'])
 
-    const result: DBVehicle[] = await collections.Violation
+    const result: DBVehicle[] = await collections.Vehicle
       .find(condition)
       .skip((params.page - 1) * params.limit)
       .limit(params.limit)
