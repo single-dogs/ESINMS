@@ -17,9 +17,10 @@ rest.del('/worker', delWorker)
 rest.put('/worker', updateWorker)
 rest.get('/worker', getWorkers)
 
-rest.get('/vehicle', getVehicle)
-rest.del('/vehicle', delVehicle)
 rest.post('/vehicle', addVehicle)
+rest.del('/vehicle', delVehicle)
+rest.put('/vehicle', updateWorker)
+rest.get('/vehicle', getVehicle)
 
 rest.get('/violation', getViolations)
 rest.del('/violation', getViolations)
