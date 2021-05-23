@@ -1,28 +1,18 @@
 import { ObjectId } from 'bson'
 import { assign, pick } from 'lodash'
-import { collections, nextId } from '../DB'
+import { collections, DBWorker, nextId } from '../DB'
 import { TimeRule } from '../Rule/Rule'
-import { Violation, Device, TimeRange } from './Device'
-
-export interface WorkerOptions {
-  _id: ObjectId;
-  id: number;
-  name: string;
-  type: string;
-  timeRange: TimeRange;
-  openTimeRule: boolean;
-  device: number;
-}
+import { Violation, Device } from './Device'
 
 export class Worker extends Device {
   public objectId: ObjectId;
   public name: string;
   public type: string;
-  public device: number;
+  public device?: number;
   public timeRule?: TimeRule;
 
 
-  private constructor(opts: WorkerOptions) {
+  private constructor(opts: DBWorker) {
     super({ id: opts.id, timeRange: opts.timeRange })
     this.objectId = opts._id
     this.name = opts.name
@@ -43,11 +33,11 @@ export class Worker extends Device {
     )
   }
 
-  public static isActivable(opts: WorkerOptions): boolean {
+  public static isActivable(opts: DBWorker): boolean {
     return opts.device !== undefined && opts.timeRange !== undefined
   }
 
-  public static deserialize(opts: WorkerOptions): Worker {
+  public static deserialize(opts: DBWorker): Worker {
     return new Worker(opts)
   }
 }

@@ -1,28 +1,18 @@
 import { ObjectId } from 'mongodb'
+import { DBVehicle } from '../DB'
 import { Manager } from '../Manager/Manager'
 import { TimeRule } from '../Rule/Rule'
-import { Device, TimeRange, Violation } from './Device'
-
-export interface VehicleOptions {
-  _id: ObjectId;
-  id: number;
-  numbers: string;
-  type: string;
-  driverId: number;
-  timeRange: TimeRange;
-  openTimeRule: boolean;
-  device: number;
-}
+import { Device, Violation } from './Device'
 
 export class Vehicle extends Device {
   public objectId: ObjectId;
   public numbers: string;
   public type: string;
   public driverId: number;
-  public device: number;
+  public device?: number;
   public timeRule?: TimeRule;
 
-  private constructor(opts: VehicleOptions) {
+  private constructor(opts: DBVehicle) {
     super({ id: opts.id, timeRange: opts.timeRange })
     this.objectId = opts._id
     this.numbers = opts.numbers
@@ -43,11 +33,11 @@ export class Vehicle extends Device {
     await this.timeRule?.close()
   }
 
-  public static isActivable(opts: VehicleOptions): boolean {
+  public static isActivable(opts: DBVehicle): boolean {
     return opts.device !== undefined && opts.driverId !== undefined && opts.timeRange !== undefined
   }
 
-  public static deserialize(opts: VehicleOptions): Vehicle {
+  public static deserialize(opts: DBVehicle): Vehicle {
     return new Vehicle(opts)
   }
 }

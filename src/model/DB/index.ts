@@ -66,7 +66,7 @@ export interface DBWorker {
 export interface DBVehicle {
   _id: ObjectId;
   id: number;
-  numbers: number;
+  numbers: string;
   type: string;
   driverId: number;
   timeRange: TimeRange;
