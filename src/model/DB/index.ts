@@ -1,5 +1,6 @@
 import { MongoClient, MongoError, ObjectId } from 'mongodb'
 import config from '../../config'
+import { DeviceData } from '../Data'
 import { TimeRange } from '../Device/Device'
 
 // 数据库配置
@@ -78,8 +79,7 @@ export interface DBViolation {
   _id: ObjectId;
   id: number;
   workerId: number;
-  lon: string;
-  lat: string;
+  position: DeviceData;
   time: Date;
   message: string;
 }
